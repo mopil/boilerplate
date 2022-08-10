@@ -6,5 +6,7 @@
 - 전역 요청 로깅 인터셉터
 - 생성일, 수정일 도입용 BaseTimeEntity
 - REST API 관련 공통 Response DTO (Error, Bool, BadRequest)
-- 검증 예외
+- BindingResult 검증 처리용 커스텀 예외
 - @Slf4j 대체용 커스텀 로거
+- Swagger 설정
+- 로그인 처리 (인터셉터, 어노테이션 + ArgumentResolver)
