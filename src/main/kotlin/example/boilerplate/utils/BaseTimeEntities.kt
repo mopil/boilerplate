@@ -40,6 +40,7 @@ abstract class BaseTimeEntity2 {
     @PrePersist
     fun prePersist() {
         this.createTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
+        this.updateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) // 업데이트도 넣어줘야 첫 생성때 null 로 안 들어감
     }
 
     @PreUpdate
