@@ -12,3 +12,4 @@
 - 로그인 처리 (인터셉터, 어노테이션 + ArgumentResolver)
 - Kotlin DSL을 사용한 MockMvc 사용 예제
 - 테스트 코드 작성시 유용하게 사용될 수 있는 함수들 (TestUtils)
+- Request body, Response body 로깅을 위한 Wrapping class
