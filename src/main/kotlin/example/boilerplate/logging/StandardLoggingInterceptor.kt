@@ -1,5 +1,6 @@
 package example.boilerplate.logging
 
+import example.boilerplate.utils.getHeadersAsString
 import example.boilerplate.utils.logger
 import org.springframework.web.servlet.HandlerInterceptor
 import org.springframework.web.servlet.ModelAndView
@@ -14,6 +15,7 @@ class StandardLoggingInterceptor : HandlerInterceptor {
     val log = logger()
 
     override fun preHandle(request: HttpServletRequest, response: HttpServletResponse, handler: Any): Boolean {
+        log.info("{}", getHeadersAsString(request)) // 헤더 정보 찍기
         log.info(
             "-------------- User Request {} -------------- {}: {}",
             request.remoteAddr,
@@ -29,6 +31,7 @@ class StandardLoggingInterceptor : HandlerInterceptor {
         handler: Any,
         modelAndView: ModelAndView?
     ) {
+        log.info("{}", getHeadersAsString(response)) // 헤더 정보 찍기
         log.info("------------ Server Response ------------- result : {}", response.status)
         super.postHandle(request, response, handler, modelAndView)
     }
