@@ -13,3 +13,5 @@
 - Kotlin DSL을 사용한 MockMvc 사용 예제
 - 테스트 코드 작성시 유용하게 사용될 수 있는 함수들 (TestUtils)
 - Request body, Response body 로깅을 위한 Wrapping class
+- QueryDSL Gradle KotlinDSL 방식으로 설정하는법 추가
+- 유효성 검증 로직 처리, ControllerAdvice 단에서 하는 방법 추가
