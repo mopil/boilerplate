@@ -1,6 +1,5 @@
 package example.boilerplate
 
-import jdk.nashorn.internal.objects.NativeRegExp.test
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing
@@ -10,8 +9,5 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing
 class BoilerplateApplication
 
 fun main(args: Array<String>) {
+    runApplication<BoilerplateApplication>(*args)
 }
-
-
-fun lambda(x: Int -> y) =
-

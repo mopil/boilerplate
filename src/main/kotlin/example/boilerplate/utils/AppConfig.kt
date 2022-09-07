@@ -1,18 +1,23 @@
 package example.boilerplate.utils
 
+import com.querydsl.jpa.impl.JPAQueryFactory
+import example.boilerplate.logging.JsonLoggingInterceptor
+import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.web.servlet.config.annotation.CorsRegistry
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
+import javax.persistence.EntityManager
+import javax.persistence.PersistenceContext
 
 @Configuration
-class AppConfig : WebMvcConfigurer {
+class AppConfig(private val loggingInterceptor: JsonLoggingInterceptor) : WebMvcConfigurer {
     /**
      * Logging 인터셉터를 등록한다.
      */
     override fun addInterceptors(registry: InterceptorRegistry) {
-        registry.addInterceptor(LoggingInterceptor())
+        registry.addInterceptor(loggingInterceptor)
             .order(1)
             .addPathPatterns("/**")
     }
@@ -24,7 +29,10 @@ class AppConfig : WebMvcConfigurer {
      */
     override fun addCorsMappings(registry: CorsRegistry) {
         registry.addMapping("/**")
-            .allowedOrigins("*")
+            .allowedOrigins("http://127.0.0.1:5173") // vite 쓰는 리액트에서 오리진 요청을 열어줘야함 (포트 주의)
+            .allowedMethods("*") // http 모든 메소드 요청 허용
+            .allowedHeaders("*") // 헤더 정보 모두 허용
+            .allowCredentials(true) // 쿠키, 세션 정보도 허용
     }
 
     /**
@@ -36,4 +44,11 @@ class AppConfig : WebMvcConfigurer {
         registry.addResourceHandler("/file/image/**")
             .addResourceLocations("file:" + "정적 파일이 저장된 경로")
     }
+}
+
+// JPAQueryFactory 빈 등록
+@Configuration
+class QuerydslConfig(@PersistenceContext private val em: EntityManager) {
+    @Bean
+    fun jpaQueryFactory(): JPAQueryFactory = JPAQueryFactory(this.em)
 }
